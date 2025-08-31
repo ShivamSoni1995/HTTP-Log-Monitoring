@@ -1,4 +1,4 @@
-Perfect ✅ since we’re only considering the **manual one-time check** version of the script, here’s a neat **README.md** draft you can use in your GitHub repo:
+
 
 ---
 
