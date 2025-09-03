@@ -86,4 +86,3 @@ nohup ./monitor_500_errors.sh &
 
 ---
 
-👉 Would you like me to also add a **section on how to run the monitoring script with `systemd`** so it survives reboots and runs automatically?
