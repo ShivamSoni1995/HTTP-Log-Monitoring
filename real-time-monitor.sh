@@ -25,3 +25,5 @@ while true; do
         > "$BUFFER"  # Clear buffer after sending
     fi
 done
+
+#You can test this script by adding loogs into the sample file and you will receive mail if a new 500 series error log is detected
