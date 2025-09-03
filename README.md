@@ -1,63 +1,89 @@
-
-
----
-
 # Log Monitor for 500 Errors
 
-This project contains a simple **shell script** that scans a log file for HTTP `500–599` server errors and sends an alert email if such errors are detected.
+This project provides shell scripts to monitor application logs for HTTP `500–599` server errors and send email alerts.
+
+It includes:
+
+1. A **manual one-time check script**
+2. A **real-time monitoring script** that batches alerts every 5 minutes
+
+---
 
 ## 🚀 Features
 
-* Reads a given log file
-* Detects **500-series error codes** (e.g., 500, 502, 503)
-* Sends an **email notification** if errors are found
-* Lightweight and beginner-friendly
+* Detects **500-series error codes** in logs (e.g., 500, 502, 503)
+* Sends **email alerts** using `mail` or `mailx`
+* Supports:
 
-
-
-## 🛠️ Prerequisites
-
-* A Linux environment
-
-* `mail` or `mailx` installed and configured
-
-  ```bash
-  # Debian/Ubuntu
-  sudo apt-get install mailutils  
-
-  # RHEL/CentOS
-  sudo yum install mailx
-  ```
-
-* SMTP configured (via `postfix`, `ssmtp`, etc.)
-
-## ▶️ Usage
-
-1. Clone the repo or copy the script.
-2. Make the script executable:
-
-   ```bash
-   chmod +x alert_500_errors.sh
-   ```
-3. Run the script manually:
-
-   ```bash
-   ./monitor.sh
-   ```
-4. If 500-series errors are detected, you’ll receive an **email alert**.
-
-## ⚠️ Notes
-
-* This script is designed for **manual one-time checks**.
-* For continuous monitoring, consider tools like `tail -F` with `systemd` or scheduling with `cron`.
-
-## 📖 Learning Outcome
-
-This script is a great starting point for understanding:
-
-* Log parsing with `grep`
-* Automating alerting with shell scripts
-* The importance of monitoring in DevOps
+  * **Manual check** (one-time execution)
+  * **Real-time monitoring** (continuous execution with batching)
 
 ---
 
+## 📂 Scripts
+
+### 1. Manual One-Time Check
+
+monitor.sh
+👉 Use this for **manual checks** when you want to scan logs and send alerts once.
+
+---
+
+### 2. Real-Time Monitoring with 5-Minute Batching
+
+real-time-monitor.sh
+
+👉 Use this for **continuous monitoring**.
+
+* Errors are collected into a buffer for 5 minutes.
+* One **email per batch** is sent, reducing alert fatigue.
+
+---
+
+## 🛠️ Prerequisites
+
+* Linux environment
+* `mail` or `mailx` installed and configured
+
+  ```bash
+  sudo apt-get install mailutils   # Debian/Ubuntu
+  sudo yum install mailx           # RHEL/CentOS
+  ```
+* SMTP configured (via `postfix`, `ssmtp`, etc.)
+
+---
+
+## ▶️ Usage
+
+### Manual One-Time Script
+
+```bash
+chmod +x alert_500_errors.sh
+./alert_500_errors.sh
+```
+
+### Real-Time Monitoring Script
+
+```bash
+chmod +x monitor_500_errors.sh
+./monitor_500_errors.sh
+```
+
+Run in background:
+
+```bash
+nohup ./monitor_500_errors.sh &
+```
+
+---
+
+## 📖 Learning Outcomes
+
+* How to parse logs with `grep`
+* Using `tail -F` for real-time monitoring
+* Batching alerts to avoid notification spam
+* Applying shell scripting for practical DevOps tasks
+
+---
+
+👉 Would you like me to also add a **section on how to run the monitoring script with `systemd`** so it survives reboots and runs automatically?
